@@ -15,11 +15,8 @@ RUN npm ci --omit=dev
 # Copie des fichiers sources de l'application
 COPY src/ ./src/
 
-# Création du dossier de persistance avec les bonnes permissions pour l'utilisateur non-root
-RUN mkdir -p /app/data && chown -R node:node /app
-
-# Passage à l'utilisateur non-root pour des raisons de sécurité
-USER node
+# Création du dossier de persistance
+RUN mkdir -p /app/data
 
 # Commande de démarrage du bot
 CMD ["node", "src/index.js"]
