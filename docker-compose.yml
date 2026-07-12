@@ -1,0 +1,12 @@
+services:
+  giveaways-bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: bloumechat-giveaways-bot
+    restart: unless-stopped
+    volumes:
+      # Montage du dossier local "data" vers "/app/data" dans le conteneur pour la persistance
+      - ./data:/app/data
+    env_file:
+      - .env
