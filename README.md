@@ -2,6 +2,10 @@
 
 Un bot de concours (giveaway) complet et prêt pour la production pour **BloumeChat**, avec persistance des données et configuration flexible par serveur.
 
+## 🔗 Liens Utiles
+- **Site Officiel** : [bloumechat.com](https://bloumechat.com)
+- **Documentation de l'API / SDK** : [BloumeChat Bot Starter](https://github.com/BloumeSAS/bloumechat-bot-starter)
+
 ---
 
 ## 🚀 Fonctionnalités
