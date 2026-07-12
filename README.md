@@ -4,6 +4,7 @@ Un bot de concours (giveaway) complet et prêt pour la production pour **BloumeC
 
 ## 🔗 Liens Utiles
 - **Site Officiel** : [bloumechat.com](https://bloumechat.com)
+- **Portail Développeur** : [dev.bloume.chat](https://dev.bloume.chat)
 - **Documentation de l'API / SDK** : [BloumeChat Bot Starter](https://github.com/BloumeSAS/bloumechat-bot-starter)
 
 ---
