@@ -10,13 +10,22 @@ module.exports = (client) => {
   console.log(`🆔 ID  : ${client.user ? client.user.id : 'Inconnu'}`);
   console.log(`========================================`);
 
-  // Set default activity
-  client.setActivity({
-    type: "playing",
-    name: "!help | Giveaways Bot"
-  }).catch(err => {
-    console.error("Impossible de définir l'activité :", err);
-  });
+  // Set default activity and refresh periodically to ensure it stays active
+  const setBotActivity = () => {
+    client.setActivity({
+      type: "playing",
+      name: "!help | Giveaways Bot"
+    }).catch(err => {
+      console.error("[Ready Event] Impossible de définir l'activité :", err);
+    });
+  };
+
+  setBotActivity();
+
+  if (client.activityInterval) {
+    clearInterval(client.activityInterval);
+  }
+  client.activityInterval = setInterval(setBotActivity, 10 * 60 * 1000);
 
   // Scan and initialize configuration files for all current servers
   try {

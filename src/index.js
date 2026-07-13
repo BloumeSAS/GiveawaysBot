@@ -65,6 +65,19 @@ client.on('guildDelete', (guild) => {
   }
 });
 
+client.on('disconnect', (reason) => {
+  console.warn(`⚠️ Déconnecté de BloumeChat (Raison : ${reason || 'Inconnue'}). Tentative de reconnexion automatique...`);
+});
+
+client.on('reconnect', () => {
+  try {
+    console.log("🔄 Reconnecté à BloumeChat !");
+    require('./events/reconnect')(client);
+  } catch (error) {
+    console.error("Erreur dans le gestionnaire d'événement 'reconnect' :", error);
+  }
+});
+
 // Handle global errors gracefully to prevent crash
 client.on('error', (error) => {
   console.error("WebSocket Client Error :", error);
@@ -77,6 +90,24 @@ process.on('unhandledRejection', (reason, promise) => {
 process.on('uncaughtException', (error) => {
   console.error('Uncaught Exception thrown:', error);
 });
+
+// Handle graceful shutdown signals to disconnect client cleanly
+const handleShutdown = () => {
+  console.log("👋 Signal d'arrêt reçu. Fermeture propre du bot...");
+  try {
+    if (client.activityInterval) {
+      clearInterval(client.activityInterval);
+    }
+    client.destroy();
+    console.log("🔌 Déconnexion de BloumeChat réussie. Arrêt du processus.");
+  } catch (err) {
+    console.error("Erreur lors de la déconnexion :", err);
+  }
+  process.exit(0);
+};
+
+process.on('SIGINT', handleShutdown);
+process.on('SIGTERM', handleShutdown);
 
 // Login to BloumeChat
 console.log("🔄 Connexion à BloumeChat en cours...");
