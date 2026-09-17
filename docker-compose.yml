@@ -6,9 +6,6 @@ services:
     container_name: bloumechat-giveaways-bot
     restart: unless-stopped
     volumes:
-      - giveaways-data:/app/data
+      - ./data:/app/data
     env_file:
       - .env
-
-volumes:
-  giveaways-data:
