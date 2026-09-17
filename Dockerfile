@@ -1,4 +1,4 @@
-FROM node:20-alpine
+FROM node:20-slim
 
 # Configuration de l'environnement de production
 ENV NODE_ENV=production
@@ -10,7 +10,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Installation des dépendances de production uniquement
-RUN npm ci --omit=dev
+RUN npm install --omit=dev
 
 # Copie des fichiers sources de l'application
 COPY src/ ./src/
