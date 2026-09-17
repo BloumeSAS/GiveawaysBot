@@ -1,4 +1,5 @@
 const { getSettings } = require('../utils/settingsManager');
+const { updateActivity } = require('../utils/activityManager');
 
 /**
  * Handles guildCreate events.
@@ -19,6 +20,9 @@ module.exports = async (client, guild) => {
     // Initialize settings file under data/<serverId>.json
     getSettings(serverId);
     
+    // Update bot activity to reflect new server count
+    updateActivity(client);
+
     console.log(`⚙️ [GuildJoin] Configuration initialisée avec succès.`);
     console.log(`========================================`);
   } catch (error) {

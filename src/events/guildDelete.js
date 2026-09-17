@@ -1,3 +1,5 @@
+const { updateActivity } = require('../utils/activityManager');
+
 /**
  * Handles guildDelete events.
  * Fired when the bot leaves a server, gets kicked, or the server is deleted.
@@ -17,6 +19,9 @@ module.exports = async (client, guild) => {
     console.log(`👤 Nom du Serveur : ${serverName}`);
     console.log(`ℹ️ [GuildLeave] Configuration conservée dans le dossier /data/.`);
     console.log(`========================================`);
+
+    // Update bot activity to reflect new server count
+    updateActivity(client);
   } catch (error) {
     console.error("[GuildLeave Error] Erreur lors de la gestion du départ du bot :", error);
   }

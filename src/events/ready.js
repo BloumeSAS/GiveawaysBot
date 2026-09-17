@@ -1,4 +1,5 @@
 const { getGiveaways, scheduleGiveaway } = require('../utils/giveawayManager');
+const { updateActivity } = require('../utils/activityManager');
 
 /**
  * @param {import('bloumechat').BloumeChat} client 
@@ -10,22 +11,13 @@ module.exports = (client) => {
   console.log(`🆔 ID  : ${client.user ? client.user.id : 'Inconnu'}`);
   console.log(`========================================`);
 
-  // Set default activity and refresh periodically to ensure it stays active
-  const setBotActivity = () => {
-    client.setActivity({
-      type: "playing",
-      name: "!help | Giveaways Bot"
-    }).catch(err => {
-      console.error("[Ready Event] Impossible de définir l'activité :", err);
-    });
-  };
-
-  setBotActivity();
+  // Set default activity displaying server count and refresh periodically
+  updateActivity(client);
 
   if (client.activityInterval) {
     clearInterval(client.activityInterval);
   }
-  client.activityInterval = setInterval(setBotActivity, 10 * 60 * 1000);
+  client.activityInterval = setInterval(() => updateActivity(client), 10 * 60 * 1000);
 
   // Scan and initialize configuration files for all current servers
   try {
